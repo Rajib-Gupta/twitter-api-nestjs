@@ -78,4 +78,17 @@ export class PostController {
     async getAllLikes(){
       return this.postService.getAllLike()
     }
+
+    @Post('retweet/:postId')
+    @UseGuards(JwtAuthGuard)
+    async retweetPost(@Param("postId") postId ,@Request() req){
+      const userId=req.user.userId
+      return this.postService.retweetPost({userId,postId})
+    }
+
+    @Get('/retweet/posts')
+    @UseGuards(JwtAuthGuard)
+    async getAllRetweets(){
+      return this.postService.getAllRetweet()
+    }
 }

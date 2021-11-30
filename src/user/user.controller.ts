@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Request,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -18,6 +19,18 @@ import { UserService } from './user.service';
 @Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get('/followees')
+  @UseGuards(JwtAuthGuard)
+  getAllfollowees(){
+    return this.userService.getAllfollowees()
+  }
+
+  @Get('/followers')
+  @UseGuards(JwtAuthGuard)
+  getAllfollowers(@Request() req){
+    return this.userService.getAllfollowers(req.user.userId)
+  }
 
   // get all users
   @Get('/all')
@@ -48,4 +61,13 @@ export class UserController {
   ) {
     return this.userService.updateUser(userid, updateUser);
   }
+
+  @Post('follow/:followeeId')
+  @UseGuards(JwtAuthGuard)
+  followUser(@Param('followeeId') followeeId,@Request() req){
+    const followerId=req.user.userId
+    return this.userService.followUser(followerId,followeeId)
+  }
+
+ 
 }

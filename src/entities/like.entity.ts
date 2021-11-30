@@ -5,10 +5,10 @@ import { UserEntity } from './user.entity';
 
 @Entity('likes')
 export class LikeEntity extends BaseEntity {
-  @Column({ nullable: false, type:'uuid', unique: true })
+  @Column({ nullable: false, type:'uuid'})
   userId: string;
 
-  @Column({ nullable: false, type:'uuid', unique: true })
+  @Column({ nullable: false, type:'uuid' })
   postId: string;
 
 

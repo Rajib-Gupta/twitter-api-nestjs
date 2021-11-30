@@ -1,7 +1,16 @@
 import { Exclude } from 'class-transformer';
 import { BaseEntity } from 'src/common/base.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+  JoinColumn,
+  JoinTable,
+} from 'typeorm';
 import { PostEntity } from './post.entity';
+import { UserFollowerPivot } from './userfollowerpivot.entity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -14,8 +23,8 @@ export class UserEntity extends BaseEntity {
   @Column({ nullable: false })
   email: string;
 
-  @Column({ nullable: false })
-  @Exclude({ toClassOnly: true })
+  @Column({ nullable: false, select: false })
+  // @Exclude({ toClassOnl })
   password: string;
 
   @Column({ nullable: true })
@@ -32,4 +41,10 @@ export class UserEntity extends BaseEntity {
 
   @OneToMany(() => PostEntity, (post) => post.user)
   posts: PostEntity[];
+
+  @OneToMany(() => UserFollowerPivot, (pivot) => pivot.follower)
+  followers: UserFollowerPivot[];
+
+  @ManyToMany(() => UserFollowerPivot, (pivot) => pivot.followee)
+  followees: UserFollowerPivot[];
 }

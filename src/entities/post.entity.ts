@@ -35,6 +35,6 @@ export class PostEntity extends BaseEntity {
   @OneToMany(() => LikeEntity, (like) => like.post)
   posts: PostEntity[];
   
-  @OneToMany(() => RetweetEntity, (like) => like.post)
+  @OneToMany(() => RetweetEntity, (retweet) => retweet.post)
   post: RetweetEntity[];
 }

@@ -15,6 +15,7 @@ import { LikeEntity } from './entities/like.entity';
 import { RetweetEntity } from './entities/retweet.entity';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { UserFollowerPivot } from './entities/userfollowerpivot.entity';
 
 @Module({
   imports: [
@@ -31,6 +32,8 @@ import { JwtModule } from '@nestjs/jwt';
       PostEntity,
       LikeEntity,
       RetweetEntity,
+      UserFollowerPivot
+      
     ]),
     AuthModule,
     {

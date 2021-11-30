@@ -8,9 +8,10 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './stategies/jwt.stategy';
 import { LocalStrategy } from './stategies/local.stategy';
 import { AuthController } from './auth.controller';
+import { UserFollowerPivot } from 'src/entities/userfollowerpivot.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([UserEntity,PostEntity]),PassportModule],
+  imports:[TypeOrmModule.forFeature([UserEntity,PostEntity,UserFollowerPivot]),PassportModule],
   providers: [AuthService,UserService,JwtStrategy,LocalStrategy],
   controllers: [AuthController]
 })
